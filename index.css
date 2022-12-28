@@ -1,6 +1,5 @@
 .app {
     min-width: 400px;
-    max-height: 90vh;
     width: 50%;
     margin: 0 auto;
 
@@ -39,6 +38,10 @@
 
 .op {
     background-color: rgb(131, 189, 255);
+}
+
+.op > :hover {
+    background-color: rgb(171, 210, 255);
 }
 
 .bot {
