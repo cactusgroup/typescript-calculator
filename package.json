@@ -1,0 +1,13 @@
+{
+    "name": "joshc-typescript-calculator",
+    "version": "0.0.1",
+    "description": "mostly useless proof of concept calculator.",
+    "repository": "https://www.github.com/cactusgroup/typescript-calculator",
+    "license": "Apache-2.0",
+    "devDependencies": {
+        "typescript": "^4.9.4"
+    },
+    "scripts": {
+        "prepare": "npx tsc"
+    }
+}

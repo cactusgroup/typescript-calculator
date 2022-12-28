@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TypeScript Calculator</title>
+        <script async src="index.js"></script>
+        <link rel="stylesheet" href="index.css" />
+    </head>
+    <body>
+        <h1>TypeScript Calculator</h1>
+        <div class="app">
+            <!-- TODO: Put invisible ARIA label in the label tag -->
+            <label for="in"><input id="in" type="text" /></label>
+
+            <!-- operations -->
+            <button type="button" class="btn op"><u>s</u>in</button>
+            <button type="button" class="btn op"><u>c</u>os</button>
+            <button type="button" class="btn op"><u>t</u>an</button>
+
+            <button type="button" class="btn op">+</button>
+            <button type="button" class="btn op">-</button>
+            <button type="button" class="btn op">*</button>
+
+            <button type="button" class="btn op bot">(</button>
+            <button type="button" class="btn op bot">)</button>
+            <button type="button" class="btn op bot">/</button>
+
+            <!-- numbers -->
+            <button type="button" class="btn">7</button>
+            <button type="button" class="btn">8</button>
+            <button type="button" class="btn">9</button>
+
+            <button type="button" class="btn">4</button>
+            <button type="button" class="btn">5</button>
+            <button type="button" class="btn">6</button>
+
+            <button type="button" class="btn">1</button>
+            <button type="button" class="btn">2</button>
+            <button type="button" class="btn">3</button>
+
+            <button type="button" class="btn" id="clear-red">C</button>
+            <button type="button" class="btn">0</button>
+            <button type="button" class="btn">.</button>
+
+            <span id="out">0.</span>
+        </div>
+    </body>
+</html>
