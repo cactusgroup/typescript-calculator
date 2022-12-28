@@ -40,7 +40,7 @@
     background-color: rgb(131, 189, 255);
 }
 
-.op > :hover {
+.op:hover {
     background-color: rgb(171, 210, 255);
 }
 
