@@ -1,6 +1,5 @@
 .app {
-    min-width: 400px;
-    width: 50%;
+    width: 400px;
     margin: 0 auto;
 
     padding: 9px;
@@ -22,12 +21,12 @@
     font-size: 40px;
 }
 
-.btn {
+button {
     --btn-margin: 2px;
     --btn-w: calc(33% - 3 * var(--btn-margin));
 
     box-sizing: border-box;
-    margin: var(--btn-margin) calc(var(--btn-margin) - 1px);
+    margin: var(--btn-margin) calc(0.5 * var(--btn-margin));
 
     font-size: 20px;
     
@@ -36,18 +35,45 @@
     padding: calc(0.2 * var(--btn-w)) 0;
 }
 
-.op {
+    /* for simulating button clicks */
+    button.hovered {
+        filter: brightness(150%)
+    }
+
+button.op {
     background-color: rgb(131, 189, 255);
 }
 
-button.op:hover {
-    background-color: rgb(171, 210, 255);
-}
+    /* for simulating button clicks */
+    button.op.hovered {
+        background-color: rgb(171, 210, 255);
+    }
 
-.bot {
+    button.op:hover {
+        background-color: rgb(171, 210, 255);
+    }
+
+    button.op:active {
+        background-color: rgb(100, 150, 255);
+    }
+
+button.bot {
     margin-bottom: calc(2px + 8px);
 }
 
 #clear-red {
-    background-color: crimson;
+    background-color: rgb(255, 0, 0);
 }
+
+    /* for simulating button clicks */
+    #clear-red.hovered {
+        background-color: rgb(195, 0, 0);
+    }
+
+    #clear-red:hover {
+        background-color: rgb(195, 0, 0);
+    }
+
+    #clear-red:active {
+        background-color: rgb(255, 142, 142);
+    }
