@@ -36,8 +36,8 @@ button {
 }
 
     /* for simulating button clicks */
-    button.hovered {
-        filter: brightness(150%)
+    button.hovered:not(.op):not(#clear-red) {
+        filter: brightness(85%);
     }
 
 button.op {

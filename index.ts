@@ -1,91 +1,78 @@
-window.onload = (e) => {
-    console.log('page fully loaded');
-    document.getElementsByTagName("html")[0].onkeyup = function (e) {
-        console.log(e.key)
-        key_to_button(e.key);
-    };
+let inputEvent = new Event("input", {
+    bubbles: false,
+    cancelable: true,
+})
+
+let btns = document.getElementsByTagName("button");
+let btnAction = {
+    "sin": " sin( ",
+    "cos": " cos( ",
+    "tan": " tan( ",
+    "plus": " + ",
+    "minus": " - ",
+    "times": " * ",
+    "lparen": " ( ",
+    "rparen": " ) ",
+    "divide": " / ",
+
+    "clear-red": "",
+    "dot": ".",
+}
+for (let i = 0; i < 10; ++i) btnAction["b"+i] = "" + i;
+
+var inText = ""
+for (let btn of btns) {
+    btn.addEventListener("click", (e) => {
+        inText += btnAction[btn.id];
+        if (btnAction[btn.id] === "")
+            inText = "";
+        document.getElementById("in").setAttribute("value", inText);
+        document.getElementById("in").dispatchEvent(inputEvent);
+    });
 }
 
-function key_to_button(key: string)
-: void {
-    let clickevt = new MouseEvent("click", {
-        bubbles: true,
-        cancelable: true,
-        view: window,
-    }),
-    mouseoverevt = new MouseEvent("mouseover", {
-        bubbles: true,
-        cancelable: true,
-        view: window,
-    }),
-    mouseleaveevt = new MouseEvent("mouseleave", {
-        bubbles: true,
-        cancelable: true,
-        view: window,
-    });
+let clickevt = new MouseEvent("click", {
+    bubbles: true,
+    cancelable: true,
+    view: window,
+}),
+mouseenterevt = new MouseEvent("mouseenter", {
+    bubbles: true,
+    cancelable: true,
+    view: window,
+}),
+mouseleaveevt = new MouseEvent("mouseleave", {
+    bubbles: true,
+    cancelable: true,
+    view: window,
+});
 
-    let elem: HTMLElement = null;
-    switch (key) {
-        case "s": elem = document.getElementById("sin");
-            break;
-        case "o": elem = document.getElementById("cos");
-            break;
-        case "t": elem = document.getElementById("tan");
-            break;
-        case "+": elem = document.getElementById("plus");
-            break;
-        case "-": elem = document.getElementById("minus");
-            break;
-        case "*": elem = document.getElementById("times");
-            break;
-        case "(": elem = document.getElementById("lparen");
-            break;
-        case ")": elem = document.getElementById("rparen");
-            break;
-        case "/": elem = document.getElementById("divide");
-            break;
+document.getElementsByTagName("html")[0]
+.addEventListener('keyup', function (e) {
+    console.log(e.key)
+    let keymapDefaultHandler = {
+        get: (target: object, name) => {
+            return target.hasOwnProperty(name) ? target[name] : "out";
+        }
+    };
+    let buttonKeymap = {
+        "s": "sin", "c": "cos", "t": "tan",
+        "+": "plus", "-": "minus", "*": "times",
+        "(": "lparen", ")": "rparen", "/": "divide",
 
-        case "c": elem = document.getElementById("clear-red");
-            console.log(elem);
-            break;
-        case "0": elem = document.getElementById("b0");
-            break;
-        case ".": elem = document.getElementById("dot");
-            break;
-        case "1": elem = document.getElementById("b1");
-            break;
-        case "2": elem = document.getElementById("b2");
-            break;
-        case "3": elem = document.getElementById("b3");
-            break;
-        case "4": elem = document.getElementById("b4");
-            break;
-        case "5": elem = document.getElementById("b5");
-            break;
-        case "6": elem = document.getElementById("b6");
-            break;
-        case "7": elem = document.getElementById("b7");
-            break;
-        case "8": elem = document.getElementById("b8");
-            break;
-        case "9": elem = document.getElementById("b9");
-            break;
-        default: elem = document.getElementById("out");
-            break;
-    }
-    elem.addEventListener("mouseover", (e) => {
-        if (elem.className.lastIndexOf(" hovered") == -1)
-            elem.className += ' hovered';
-    });
-    elem.addEventListener("mouseleave", () => {
-        elem.className = elem.className.slice(0, elem.className.lastIndexOf(" hovered"));
-    });
+        // numbers
+        "C": "clear-red", ".": "dot",
+    };
+    for (let i = 0; i < 10; ++i) { buttonKeymap[""+i] = "b"+i; }
+    let defaultKeymap = new Proxy(buttonKeymap, keymapDefaultHandler);
 
-    elem.dispatchEvent(mouseoverevt);
-    console.log(key + " hovered");
+    let elem: HTMLElement = document.getElementById(defaultKeymap[e.key]);
+    elem.addEventListener("mouseenter", (e) => elem.classList.add('hovered'));
+    elem.addEventListener("mouseleave", (e) => elem.classList.remove('hovered'));
+
+    elem.dispatchEvent(mouseenterevt);
     setTimeout(() => {
         elem.dispatchEvent(clickevt);
         elem.dispatchEvent(mouseleaveevt);
-        console.log(key + " left");
     }, 250);
-}
+});
