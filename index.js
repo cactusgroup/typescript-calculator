@@ -5,7 +5,7 @@ let inputEvent = new Event("input", {
 let btns = document.getElementsByTagName("button");
 let btnAction = {
     "sin": " sin( ",
-    "cos": " cos{ ",
+    "cos": " cos( ",
     "tan": " tan( ",
     "plus": " + ",
     "minus": " - ",
