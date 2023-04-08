@@ -1,34 +1,10 @@
+import { Calculator } from "./Calculator.js";
+var calc = Calculator;
+// events
 let inputEvent = new Event("input", {
     bubbles: false,
     cancelable: true,
-});
-let btns = document.getElementsByTagName("button");
-let btnAction = {
-    "sin": " sin( ",
-    "cos": " cos( ",
-    "tan": " tan( ",
-    "plus": " + ",
-    "minus": " - ",
-    "times": " * ",
-    "lparen": " ( ",
-    "rparen": " ) ",
-    "divide": " / ",
-    "clear-red": "",
-    "dot": ".",
-};
-for (let i = 0; i < 10; ++i)
-    btnAction["b" + i] = "" + i;
-var inText = "";
-for (let btn of btns) {
-    btn.addEventListener("click", (e) => {
-        inText += btnAction[btn.id];
-        if (btnAction[btn.id] === "")
-            inText = "";
-        document.getElementById("in").setAttribute("value", inText);
-        document.getElementById("in").dispatchEvent(inputEvent);
-    });
-}
-let clickevt = new MouseEvent("click", {
+}), clickevt = new MouseEvent("click", {
     bubbles: true,
     cancelable: true,
     view: window,
@@ -41,8 +17,42 @@ let clickevt = new MouseEvent("click", {
     cancelable: true,
     view: window,
 });
+// user text
+var inText = "";
+// button -> (text, parse) actions
+let btns = document.getElementsByTagName("button");
+let btnTextAction = {
+    "sin": " sin( ", "cos": " cos( ", "tan": " tan( ",
+    "plus": " + ", "minus": " - ", "times": " * ",
+    "lparen": " ( ", "rparen": " ) ", "divide": " / ",
+    "clear-red": "", "dot": ".", "enter": "",
+};
+for (let i = 0; i < 10; ++i)
+    btnTextAction["b" + i] = "" + i;
+for (let btn of btns) {
+    btn.addEventListener("click", (e) => {
+        inText += btnTextAction[btn.id];
+        if (btn.id === "clear-red")
+            inText = "";
+        if (btn.id === "enter") {
+            calc.setInput(inText);
+            document.getElementById("out").textContent = "" + calc.getOutput();
+            return;
+        }
+        document.getElementById("in").value = inText;
+        document.getElementById("in").dispatchEvent(inputEvent);
+    });
+}
+let ininput = document.getElementById("in");
+ininput.addEventListener("input", (e) => {
+    inText = ininput.value;
+    console.log(inText);
+});
+// keystroke -> button
 document.getElementsByTagName("html")[0]
     .addEventListener('keyup', function (e) {
+    if (document.activeElement === document.getElementById("in"))
+        return;
     console.log(e.key);
     let keymapDefaultHandler = {
         get: (target, name) => {
@@ -53,6 +63,7 @@ document.getElementsByTagName("html")[0]
         "s": "sin", "c": "cos", "t": "tan",
         "+": "plus", "-": "minus", "*": "times",
         "(": "lparen", ")": "rparen", "/": "divide",
+        "Enter": "enter",
         // numbers
         "C": "clear-red", ".": "dot",
     };

@@ -1,14 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>TypeScript Calculator</title>
-        <script defer src="index.js"></script>
+        <script defer src="index.js" type="module"></script>
+        <script defer src="Calculator.js" type="module"></script>
         <link rel="stylesheet" href="index.css" />
     </head>
     <body>
+        <nav>
+            <ul>
+                <li><a href="https://cactusgroup.github.io">Home</a></li>
+                <li>
+                    My other pages
+                    <ul>
+                        <li><a href="https://cactusgroup.github.io/new-year-questions">New Year questions</a></li>
+                        <li><a href="https://cactusgroup.github.io/CactusGames">CactusGames</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
         <h1>TypeScript Calculator</h1>
         <div class="app">
-            <input aria-label="in" id="in" type="text" value=""/>
+            <div>
+                <input aria-label="in" id="in" type="text" value=""/>
+                <button type="button" class="enter" id="enter">=</button>
+            </div>
             <span aria-label="out" id="out">0.</span>
 
             <!-- operations -->
