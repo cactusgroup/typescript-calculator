@@ -59,7 +59,7 @@ function lex(): TokenType {
     for(; current < input.length; ++current) {
         // get next character
         if (current >= input.length) {
-            console.log(`offset: {offset} len: {len}`);
+            console.log(`offset: ${offset} len: ${len}`);
             return TokenType.EOI;
         }
         text[current] = input.charAt(current);
@@ -82,7 +82,7 @@ function lex(): TokenType {
             }
         }
 
-        // single-char cases
+        // single-char + number cases
         switch (text[current]) {
             // other 6 function cases
             case '+': return TokenType.PLUS;
@@ -99,10 +99,11 @@ function lex(): TokenType {
             // number case
             default:
             {
-                const isDigit = ((n: string) => {
+                const isDigit = ((n: string): boolean => {
                     return '0'.charCodeAt(0) < n.charCodeAt(0)
                         && n.charCodeAt(0) < '9'.charCodeAt(0);
                 });
+                // first character either digit or sign or decimal point
                 if (!(
                     isDigit(text[current]) ||
                     '+' == text[current] ||
